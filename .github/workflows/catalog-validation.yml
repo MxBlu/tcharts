@@ -1,0 +1,28 @@
+name: Catalog validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install catalog validation tool
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "git+https://github.com/MxBlu/catalog_validation.git"
+
+      - name: Validate catalog structure
+        run: catalog_validate validate --path "${{ github.workspace }}"

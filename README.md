@@ -6,6 +6,22 @@ This repository is a minimal custom catalog starter for TrueNAS SCALE 23.10.x.
 
 - `hello-truenas`: a simple `traefik/whoami` Helm app to verify your catalog works.
 
+## Catalog validation
+
+This repo validates catalog changes automatically in GitHub Actions using
+[`MxBlu/catalog_validation`](https://github.com/MxBlu/catalog_validation).
+
+- Workflow: `.github/workflows/catalog-validation.yml`
+- Runs on pull requests and pushes to `main`
+- Command used: `catalog_validate validate --path <repo-root>`
+
+Run locally:
+
+```bash
+python -m pip install "git+https://github.com/MxBlu/catalog_validation.git"
+bash scripts/validate-catalog.sh
+```
+
 ## Required metadata
 
 TrueNAS SCALE 23.10 expects a top-level `catalog.json` file.
