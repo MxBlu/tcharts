@@ -1,0 +1,37 @@
+{
+  "charts": {
+    "hello-truenas": {
+      "app_readme": "<h1>Hello TrueNAS</h1><p>This is a tiny starter application for custom TrueNAS SCALE catalogs.</p><p>It deploys <code>traefik/whoami</code>, which returns request info and is useful for connectivity and ingress testing.</p><p>Use this chart as a template for your own apps.</p>",
+      "categories": [
+        "generic"
+      ],
+      "description": "Minimal starter app for validating a custom TrueNAS catalog",
+      "healthy": true,
+      "healthy_error": null,
+      "home": "https://github.com/traefik/whoami",
+      "location": "charts/hello-truenas",
+      "latest_version": "1.0.0",
+      "latest_app_version": "v1.10.1",
+      "latest_human_version": "v1.10.1_1.0.0",
+      "last_update": "2026-05-12 00:00:00",
+      "name": "hello-truenas",
+      "recommended": false,
+      "title": "Hello TrueNAS",
+      "maintainers": [
+        {
+          "name": "your-name",
+          "email": "you@example.com"
+        }
+      ],
+      "tags": [
+        "demo",
+        "whoami"
+      ],
+      "screenshots": [],
+      "sources": [
+        "https://github.com/traefik/whoami"
+      ],
+      "icon_url": "https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png"
+    }
+  }
+}

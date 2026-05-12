@@ -6,6 +6,11 @@ This repository is a minimal custom catalog starter for TrueNAS SCALE 23.10.x.
 
 - `hello-truenas`: a simple `traefik/whoami` Helm app to verify your catalog works.
 
+## Required metadata
+
+TrueNAS SCALE 23.10 expects a top-level `catalog.json` file.
+This starter includes it and points at the `hello-truenas` app.
+
 ## Catalog structure
 
 The `charts` directory is the train exposed in the TrueNAS UI.
@@ -20,6 +25,7 @@ charts/
       ix_values.yaml
       questions.yaml
       templates/
+catalog.json
 ```
 
 ## Add in TrueNAS
