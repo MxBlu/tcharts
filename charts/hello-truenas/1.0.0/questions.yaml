@@ -1,0 +1,80 @@
+groups:
+  - name: "Container Images"
+    description: "Image configuration"
+  - name: "Networking"
+    description: "Service networking"
+
+questions:
+  - variable: image
+    label: "Docker Image"
+    description: "Docker image settings"
+    group: "Container Images"
+    schema:
+      type: dict
+      required: true
+      attrs:
+        - variable: repository
+          label: "Repository"
+          schema:
+            type: string
+            required: true
+            default: "traefik/whoami"
+        - variable: tag
+          label: "Tag"
+          schema:
+            type: string
+            required: true
+            default: "v1.10.1"
+        - variable: pullPolicy
+          label: "Pull Policy"
+          schema:
+            type: string
+            default: "IfNotPresent"
+            enum:
+              - value: "IfNotPresent"
+                description: "Only pull if missing"
+              - value: "Always"
+                description: "Always pull"
+              - value: "Never"
+                description: "Never pull"
+
+  - variable: service
+    label: "Service"
+    description: "Service exposure settings"
+    group: "Networking"
+    schema:
+      type: dict
+      required: true
+      attrs:
+        - variable: type
+          label: "Service Type"
+          schema:
+            type: string
+            default: "NodePort"
+            enum:
+              - value: "NodePort"
+                description: "Expose using a node port"
+              - value: "ClusterIP"
+                description: "Cluster-internal only"
+        - variable: port
+          label: "Service Port"
+          schema:
+            type: int
+            default: 80
+            min: 1
+            max: 65535
+        - variable: targetPort
+          label: "Container Port"
+          schema:
+            type: int
+            default: 80
+            min: 1
+            max: 65535
+        - variable: nodePort
+          label: "Node Port"
+          schema:
+            show_if: [["type", "=", "NodePort"]]
+            type: int
+            default: 30999
+            min: 9000
+            max: 65535

@@ -1,0 +1,18 @@
+apiVersion: v2
+name: hello-truenas
+description: Minimal starter app for validating a custom TrueNAS catalog
+type: application
+version: 1.0.0
+appVersion: "v1.10.1"
+annotations:
+  title: Hello TrueNAS
+home: https://github.com/traefik/whoami
+icon: https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png
+maintainers:
+  - name: your-name
+    email: you@example.com
+keywords:
+  - demo
+  - whoami
+sources:
+  - https://github.com/traefik/whoami
