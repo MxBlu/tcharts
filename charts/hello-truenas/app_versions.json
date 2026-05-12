@@ -1,0 +1,171 @@
+{
+  "1.0.0": {
+    "healthy": true,
+    "supported": true,
+    "healthy_error": null,
+    "location": "charts/hello-truenas/1.0.0",
+    "last_update": "2026-05-12 00:00:00",
+    "human_version": "v1.10.1_1.0.0",
+    "version": "1.0.0",
+    "chart_metadata": {
+      "apiVersion": "v2",
+      "name": "hello-truenas",
+      "description": "Minimal starter app for validating a custom TrueNAS catalog",
+      "type": "application",
+      "version": "1.0.0",
+      "appVersion": "v1.10.1",
+      "annotations": {
+        "title": "Hello TrueNAS"
+      },
+      "home": "https://github.com/traefik/whoami",
+      "icon": "https://raw.githubusercontent.com/traefik/traefik/master/docs/content/assets/img/traefik.logo.png",
+      "maintainers": [
+        {
+          "name": "your-name",
+          "email": "you@example.com"
+        }
+      ],
+      "keywords": [
+        "demo",
+        "whoami"
+      ],
+      "sources": [
+        "https://github.com/traefik/whoami"
+      ]
+    },
+    "app_metadata": null,
+    "schema": {
+      "groups": [
+        {
+          "name": "Container Images",
+          "description": "Image configuration"
+        },
+        {
+          "name": "Networking",
+          "description": "Service networking"
+        }
+      ],
+      "questions": [
+        {
+          "variable": "image",
+          "label": "Docker Image",
+          "description": "Docker image settings",
+          "group": "Container Images",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "repository",
+                "label": "Repository",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "traefik/whoami"
+                }
+              },
+              {
+                "variable": "tag",
+                "label": "Tag",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "v1.10.1"
+                }
+              },
+              {
+                "variable": "pullPolicy",
+                "label": "Pull Policy",
+                "schema": {
+                  "type": "string",
+                  "default": "IfNotPresent",
+                  "enum": [
+                    {
+                      "value": "IfNotPresent",
+                      "description": "Only pull if missing"
+                    },
+                    {
+                      "value": "Always",
+                      "description": "Always pull"
+                    },
+                    {
+                      "value": "Never",
+                      "description": "Never pull"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "variable": "service",
+          "label": "Service",
+          "description": "Service exposure settings",
+          "group": "Networking",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "type",
+                "label": "Service Type",
+                "schema": {
+                  "type": "string",
+                  "default": "NodePort",
+                  "enum": [
+                    {
+                      "value": "NodePort",
+                      "description": "Expose using a node port"
+                    },
+                    {
+                      "value": "ClusterIP",
+                      "description": "Cluster-internal only"
+                    }
+                  ]
+                }
+              },
+              {
+                "variable": "port",
+                "label": "Service Port",
+                "schema": {
+                  "type": "int",
+                  "default": 80,
+                  "min": 1,
+                  "max": 65535
+                }
+              },
+              {
+                "variable": "targetPort",
+                "label": "Container Port",
+                "schema": {
+                  "type": "int",
+                  "default": 80,
+                  "min": 1,
+                  "max": 65535
+                }
+              },
+              {
+                "variable": "nodePort",
+                "label": "Node Port",
+                "schema": {
+                  "show_if": [
+                    [
+                      "type",
+                      "=",
+                      "NodePort"
+                    ]
+                  ],
+                  "type": "int",
+                  "default": 30999,
+                  "min": 9000,
+                  "max": 65535
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
