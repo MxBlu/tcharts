@@ -181,7 +181,7 @@
                 "schema": {
                   "type": "string",
                   "required": true,
-                  "default": "1.29.2"
+                  "default": "2.0.14"
                 }
               },
               {

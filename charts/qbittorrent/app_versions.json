@@ -113,7 +113,7 @@
                 "schema": {
                   "type": "string",
                   "required": true,
-                  "default": "ghcr.io/onedr0p/qbittorrent"
+                  "default": "ghcr.io/home-operations/qbittorrent"
                 }
               },
               {
@@ -122,7 +122,7 @@
                 "schema": {
                   "type": "string",
                   "required": true,
-                  "default": "5.0.4"
+                  "default": "5.1.4"
                 }
               },
               {

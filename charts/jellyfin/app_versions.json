@@ -1906,7 +1906,7 @@
                 "schema": {
                   "type": "string",
                   "required": true,
-                  "default": "10.10.6"
+                  "default": "10.11.6"
                 }
               },
               {

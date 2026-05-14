@@ -607,6 +607,57 @@
           }
         },
         {
+          "variable": "image",
+          "group": "Nginx Proxy Manager Configuration",
+          "label": "Image",
+          "schema": {
+            "type": "dict",
+            "attrs": [
+              {
+                "variable": "repository",
+                "label": "Repository",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "jc21/nginx-proxy-manager"
+                }
+              },
+              {
+                "variable": "tag",
+                "label": "Tag",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "2.14.0"
+                }
+              },
+              {
+                "variable": "pullPolicy",
+                "label": "Pull Policy",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "IfNotPresent",
+                  "enum": [
+                    {
+                      "value": "IfNotPresent",
+                      "description": "Pull image only if it is not already present"
+                    },
+                    {
+                      "value": "Always",
+                      "description": "Always pull the image before starting a container"
+                    },
+                    {
+                      "value": "Never",
+                      "description": "Never pull the image and use local image only"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
           "variable": "npmConfig",
           "label": "",
           "group": "Nginx Proxy Manager Configuration",

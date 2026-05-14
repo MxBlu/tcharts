@@ -69,7 +69,7 @@ questions:
           description: Container image tag for Community edition
           schema:
             type: string
-            default: "2.19.3"
+            default: "2.38.1"
   - variable: beImage
     group: Container Image
     label: Business Image
@@ -88,7 +88,7 @@ questions:
           description: Container image tag for Business edition
           schema:
             type: string
-            default: "2.19.3"
+            default: "2.38.1"
   - variable: workload
     group: "Workload Settings"
     label: ""
