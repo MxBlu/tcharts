@@ -40,7 +40,7 @@ questions:
           schema:
             type: string
             required: true
-            default: '250228'
+            default: '260305'
         - variable: pullPolicy
           label: Pull Policy
           schema:

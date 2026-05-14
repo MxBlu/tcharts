@@ -48,7 +48,7 @@ questions:
           schema:
             type: string
             required: true
-            default: 2.12.3
+            default: 2.14.0
         - variable: pullPolicy
           label: Pull Policy
           schema:

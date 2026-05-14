@@ -32,13 +32,13 @@ questions:
           schema:
             type: string
             required: true
-            default: ghcr.io/onedr0p/qbittorrent
+            default: ghcr.io/home-operations/qbittorrent
         - variable: tag
           label: Tag
           schema:
             type: string
             required: true
-            default: 5.0.4
+            default: 5.1.4
         - variable: pullPolicy
           label: Pull Policy
           schema:
