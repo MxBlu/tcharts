@@ -5475,7 +5475,8 @@
           }
         }
       ]
-    }
+    },
+    "changelog": null
   },
   "5.0.21": {
     "healthy": true,
@@ -9839,6 +9840,7 @@
           }
         }
       ]
-    }
+    },
+    "changelog": null
   }
 }
