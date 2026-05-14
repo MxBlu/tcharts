@@ -1186,7 +1186,7 @@
       "description": "Container management made easy",
       "appVersion": "2.19.3",
       "home": "https://truecharts.org/charts/stable/portainer",
-      "icon": "https://truecharts.org/img/hotlink-ok/chart-icons/portainer.png",
+      "icon": "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/portainer.png",
       "sources": [
         "https://hub.docker.com/r/portainer/portainer-ce",
         "https://docs.portainer.io/start/install-ce/server",

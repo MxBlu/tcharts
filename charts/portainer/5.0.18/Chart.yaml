@@ -5,7 +5,7 @@ version: 5.0.18
 appVersion: 2.19.3
 description: Container management made easy
 home: https://truecharts.org/charts/stable/portainer
-icon: https://truecharts.org/img/hotlink-ok/chart-icons/portainer.png
+icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/portainer.png
 deprecated: false
 sources:
   - https://hub.docker.com/r/portainer/portainer-ce
