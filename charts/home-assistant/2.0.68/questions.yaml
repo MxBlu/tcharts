@@ -50,7 +50,7 @@ questions:
           schema:
             type: string
             required: true
-            default: 2025.3.0
+            default: 2026.4.1
         - variable: pullPolicy
           label: Pull Policy
           schema:
