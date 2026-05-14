@@ -29,8 +29,7 @@ This starter includes it and points at the `hello-truenas` app.
 
 ## Catalog structure
 
-The `charts` directory is the app location in this starter. For SCALE 23.10,
-`catalog.json` also exposes a `stable` train entry pointing to the same app.
+The `charts` directory is the app location in this starter.
 
 ```text
 charts/
@@ -44,8 +43,6 @@ charts/
       templates/
 catalog.json
 ```
-
-In 23.10, select `stable` as the preferred train when adding the catalog.
 
 ## Add in TrueNAS
 
