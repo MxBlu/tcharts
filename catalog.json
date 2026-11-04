@@ -318,9 +318,9 @@
       "healthy_error": null,
       "home": "https://prometheus.io/",
       "location": "charts/prometheus",
-      "latest_version": "1.0.0",
+      "latest_version": "1.0.1",
       "latest_app_version": "v3.15.1",
-      "latest_human_version": "v3.15.1_1.0.0",
+      "latest_human_version": "v3.15.1_1.0.1",
       "last_update": "2026-11-04 00:00:00",
       "name": "prometheus",
       "recommended": false,
@@ -445,6 +445,41 @@
       "screenshots": [],
       "sources": [
         "https://github.com/prometheus-pve/prometheus-pve-exporter"
+      ],
+      "icon_url": "https://pve.proxmox.com/favicon.ico"
+    },
+    "pve-extra-exporter": {
+      "app_readme": "<h1>PVE Extra Exporter</h1><p>Node NIC rates + user last-login for Proxmox VE.</p>",
+      "categories": [
+        "monitoring"
+      ],
+      "description": "Node network rates (RRD) and user last-login (syslog) for Proxmox VE.",
+      "healthy": true,
+      "healthy_error": null,
+      "home": "https://github.com/MxBlu/tcharts",
+      "location": "charts/pve-extra-exporter",
+      "latest_version": "1.0.0",
+      "latest_app_version": "1.0.0",
+      "latest_human_version": "1.0.0_1.0.0",
+      "last_update": "2026-11-04 00:00:00",
+      "name": "pve-extra-exporter",
+      "recommended": false,
+      "title": "PVE Extra Exporter",
+      "maintainers": [
+        {
+          "name": "MxBlu",
+          "email": "mxblu@example.com"
+        }
+      ],
+      "tags": [
+        "monitoring",
+        "metrics",
+        "prometheus",
+        "proxmox"
+      ],
+      "screenshots": [],
+      "sources": [
+        "https://github.com/MxBlu/tcharts"
       ],
       "icon_url": "https://pve.proxmox.com/favicon.ico"
     }

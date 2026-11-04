@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: {{ .Values.scrape.interval | quote }}
+      evaluation_interval: 30s
+    alerting:
+      alertmanagers:
+        - static_configs:
+            - targets:
+                - "{{ .Values.alerting.host }}:{{ .Values.alerting.port }}"
+    rule_files:
+      - /etc/prometheus/rules.yml
+    scrape_configs:
+      - job_name: prometheus
+        static_configs:
+          - targets: ["localhost:9090"]
+      - job_name: pve-extra
+        static_configs:
+          - targets: ["{{ .Values.extraExporter.host }}:{{ .Values.extraExporter.port }}"]
+      - job_name: pve
+        metrics_path: /pve
+        params:
+          module: [default]
+        static_configs:
+          - targets: ["{{ .Values.scrape.pveHost }}"]
+        relabel_configs:
+          - source_labels: [__address__]
+            target_label: __param_target
+          - source_labels: [__param_target]
+            target_label: instance
+          - target_label: __address__
+            replacement: "{{ .Values.scrape.exporterHost }}:{{ .Values.scrape.exporterPort }}"
+  rules.yml: |
+    groups:
+      - name: proxmox
+        interval: 1m
+        rules:
+          - alert: PrometheusTargetDown
+            expr: up == 0
+            for: 2m
+            labels:
+              severity: critical
+            annotations:
+              summary: "Prometheus target {{ "{{"}} $labels.job {{"}}"}}/{{ "{{"}} $labels.instance {{"}}"}} is down"
+          - alert: ProxmoxNodeDown
+            expr: pve_up{id=~"node/.*"} == 0
+            for: 2m
+            labels:
+              severity: critical
+            annotations:
+              summary: "Proxmox node {{ "{{"}} $labels.id {{"}}"}} is down"
+          - alert: ProxmoxGuestDown
+            expr: pve_up{id=~"(qemu|lxc)/.*"} == 0
+            for: 5m
+            labels:
+              severity: warning
+            annotations:
+              summary: "Proxmox guest {{ "{{"}} $labels.id {{"}}"}} is down"
+          - alert: ProxmoxDiskSpaceHigh
+            expr: pve_disk_usage_bytes / pve_disk_size_bytes > 0.85
+            for: 10m
+            labels:
+              severity: warning
+            annotations:
+              summary: "Proxmox disk {{ "{{"}} $labels.id {{"}}"}} over 85% full"
+          - alert: ProxmoxCpuHigh
+            expr: pve_cpu_usage_ratio > 0.85
+            for: 10m
+            labels:
+              severity: warning
+            annotations:
+              summary: "Proxmox CPU high on {{ "{{"}} $labels.id {{"}}"}}"

@@ -1,0 +1,1 @@
+<h1>Prometheus</h1><p>Prometheus time-series database scraping Proxmox VE metrics via <code>pve-exporter</code>, with built-in Proxmox alert rules and Alertmanager forwarding.</p><p>Scrape target and Alertmanager endpoint are configurable at install time. Data persists on the host path.</p>
