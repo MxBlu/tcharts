@@ -42,32 +42,32 @@ data:
             labels:
               severity: critical
             annotations:
-              summary: "Prometheus target {{ $labels.job }}/{{ $labels.instance }} is down"
+              summary: "Prometheus target {{ "{{"}} $labels.job {{"}}"}}/{{ "{{"}} $labels.instance {{"}}"}} is down"
           - alert: ProxmoxNodeDown
             expr: pve_up{id=~"node/.*"} == 0
             for: 2m
             labels:
               severity: critical
             annotations:
-              summary: "Proxmox node {{ $labels.id }} is down"
+              summary: "Proxmox node {{ "{{"}} $labels.id {{"}}"}} is down"
           - alert: ProxmoxGuestDown
             expr: pve_up{id=~"(qemu|lxc)/.*"} == 0
             for: 5m
             labels:
               severity: warning
             annotations:
-              summary: "Proxmox guest {{ $labels.id }} is down"
+              summary: "Proxmox guest {{ "{{"}} $labels.id {{"}}"}} is down"
           - alert: ProxmoxDiskSpaceHigh
             expr: pve_disk_usage_bytes / pve_disk_size_bytes > 0.85
             for: 10m
             labels:
               severity: warning
             annotations:
-              summary: "Proxmox disk {{ $labels.id }} over 85% full"
+              summary: "Proxmox disk {{ "{{"}} $labels.id {{"}}"}} over 85% full"
           - alert: ProxmoxCpuHigh
             expr: pve_cpu_usage_ratio > 0.85
             for: 10m
             labels:
               severity: warning
             annotations:
-              summary: "Proxmox CPU high on {{ $labels.id }}"
+              summary: "Proxmox CPU high on {{ "{{"}} $labels.id {{"}}"}}"
