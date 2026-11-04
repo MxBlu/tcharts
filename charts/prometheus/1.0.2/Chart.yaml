@@ -1,0 +1,21 @@
+apiVersion: v2
+name: prometheus
+description: Prometheus monitoring server scraping Proxmox VE via pve-exporter, with
+  alert rules.
+type: application
+version: 1.0.2
+appVersion: v3.15.1
+annotations:
+  title: Prometheus
+home: https://prometheus.io/
+icon: https://media.sys.truenas.net/apps/prometheus/icons/icon.png
+maintainers:
+- name: MxBlu
+  email: mxblu@example.com
+keywords:
+- monitoring
+- metrics
+- prometheus
+- proxmox
+sources:
+- https://github.com/prometheus/prometheus
