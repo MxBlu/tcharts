@@ -1,0 +1,20 @@
+image:
+  repository: prom/prometheus
+  tag: v3.15.1
+  pullPolicy: IfNotPresent
+service:
+  type: NodePort
+  port: 9090
+  targetPort: 9090
+  nodePort: 30900
+storage:
+  hostPath: /mnt/fast/monitoring/prometheus
+scrape:
+  pveHost: 192.168.2.10
+  exporterHost: 192.168.0.117
+  exporterPort: 30903
+  interval: 30s
+alerting:
+  host: 192.168.0.117
+  port: 30902
+retention: 90d

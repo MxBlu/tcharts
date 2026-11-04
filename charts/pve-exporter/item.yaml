@@ -1,0 +1,8 @@
+categories:
+- monitoring
+icon_url: https://pve.proxmox.com/favicon.ico
+tags:
+- monitoring
+- metrics
+- prometheus
+- proxmox

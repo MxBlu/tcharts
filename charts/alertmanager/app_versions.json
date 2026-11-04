@@ -1,0 +1,250 @@
+{
+  "1.0.0": {
+    "healthy": true,
+    "supported": true,
+    "healthy_error": null,
+    "location": "/charts/alertmanager/1.0.0",
+    "last_update": "2026-11-04 00:00:00",
+    "required_features": [],
+    "human_version": "v0.34.1_1.0.0",
+    "version": "1.0.0",
+    "chart_metadata": {
+      "apiVersion": "v2",
+      "name": "alertmanager",
+      "description": "Prometheus Alertmanager routing Proxmox alerts to webhook and email receivers.",
+      "type": "application",
+      "version": "1.0.0",
+      "appVersion": "v0.34.1",
+      "annotations": {
+        "title": "Alertmanager"
+      },
+      "home": "https://prometheus.io/docs/alerting/latest/alertmanager/",
+      "icon": "https://prometheus.io/assets/favicons/favicon.ico",
+      "maintainers": [
+        {
+          "name": "MxBlu",
+          "email": "mxblu@example.com"
+        }
+      ],
+      "keywords": [
+        "monitoring",
+        "alerting",
+        "prometheus",
+        "proxmox"
+      ],
+      "sources": [
+        "https://github.com/prometheus/alertmanager"
+      ]
+    },
+    "app_metadata": null,
+    "schema": {
+      "groups": [
+        {
+          "name": "Container Images",
+          "description": "Image configuration"
+        },
+        {
+          "name": "Networking",
+          "description": "Service networking"
+        },
+        {
+          "name": "Storage",
+          "description": "Persistent storage"
+        },
+        {
+          "name": "Monitoring",
+          "description": "Monitoring configuration"
+        }
+      ],
+      "questions": [
+        {
+          "variable": "image",
+          "label": "Docker Image",
+          "description": "Docker image settings",
+          "group": "Container Images",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "repository",
+                "label": "Repository",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "prom/alertmanager"
+                }
+              },
+              {
+                "variable": "tag",
+                "label": "Tag",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "v0.34.1"
+                }
+              },
+              {
+                "variable": "pullPolicy",
+                "label": "Pull Policy",
+                "schema": {
+                  "type": "string",
+                  "default": "IfNotPresent",
+                  "enum": [
+                    {
+                      "value": "IfNotPresent",
+                      "description": "Only pull if missing"
+                    },
+                    {
+                      "value": "Always",
+                      "description": "Always pull"
+                    },
+                    {
+                      "value": "Never",
+                      "description": "Never pull"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "variable": "service",
+          "label": "Service",
+          "description": "Service exposure settings",
+          "group": "Networking",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "type",
+                "label": "Service Type",
+                "schema": {
+                  "type": "string",
+                  "default": "NodePort",
+                  "enum": [
+                    {
+                      "value": "NodePort",
+                      "description": "Expose using a node port"
+                    },
+                    {
+                      "value": "ClusterIP",
+                      "description": "Cluster-internal only"
+                    }
+                  ]
+                }
+              },
+              {
+                "variable": "port",
+                "label": "Service Port",
+                "schema": {
+                  "type": "int",
+                  "default": 9093,
+                  "min": 1,
+                  "max": 65535
+                }
+              },
+              {
+                "variable": "targetPort",
+                "label": "Container Port",
+                "schema": {
+                  "type": "int",
+                  "default": 9093,
+                  "min": 1,
+                  "max": 65535
+                }
+              },
+              {
+                "variable": "nodePort",
+                "label": "Node Port",
+                "schema": {
+                  "show_if": [
+                    [
+                      "type",
+                      "=",
+                      "NodePort"
+                    ]
+                  ],
+                  "type": "int",
+                  "default": 30902,
+                  "min": 9000,
+                  "max": 65535
+                }
+              }
+            ]
+          }
+        },
+        {
+          "variable": "storage",
+          "label": "Storage",
+          "description": "Persistent data location on the TrueNAS host",
+          "group": "Storage",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "hostPath",
+                "label": "Data host path",
+                "description": "Host directory for persistent data (created if missing)",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "/mnt/fast/monitoring/alertmanager"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "variable": "notify",
+          "label": "Notifications",
+          "description": "At least one receiver is recommended; alerts queue silently with none",
+          "group": "Monitoring",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "webhookUrl",
+                "label": "Webhook URL (optional)",
+                "description": "e.g. Discord/Slack/Gotify webhook; leave empty to disable",
+                "schema": {
+                  "type": "string",
+                  "default": ""
+                }
+              },
+              {
+                "variable": "emailTo",
+                "label": "Email to (optional)",
+                "schema": {
+                  "type": "string",
+                  "default": ""
+                }
+              },
+              {
+                "variable": "smtpHost",
+                "label": "SMTP smarthost",
+                "description": "host:port of SMTP relay",
+                "schema": {
+                  "type": "string",
+                  "default": "localhost:25"
+                }
+              },
+              {
+                "variable": "smtpFrom",
+                "label": "SMTP from address",
+                "schema": {
+                  "type": "string",
+                  "default": "alertmanager@example.com"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

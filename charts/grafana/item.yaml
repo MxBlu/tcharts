@@ -1,0 +1,8 @@
+categories:
+- monitoring
+icon_url: https://media.sys.truenas.net/apps/grafana/icons/icon.png
+tags:
+- monitoring
+- dashboards
+- grafana
+- proxmox

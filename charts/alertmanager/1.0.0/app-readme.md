@@ -1,0 +1,1 @@
+<h1>Alertmanager</h1><p>Handles alerts from Prometheus. Configure a webhook URL (Discord/Slack/Gotify) and/or email at install time. With no receivers configured, alerts are stored but not delivered.</p>

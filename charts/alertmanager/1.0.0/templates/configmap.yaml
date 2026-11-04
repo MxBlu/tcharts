@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}
+data:
+  alertmanager.yml: |
+    global:
+      resolve_timeout: 5m
+    route:
+      receiver: default
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 4h
+    receivers:
+      - name: default
+        {{- if .Values.notify.webhookUrl }}
+        webhook_configs:
+          - url: {{ .Values.notify.webhookUrl | quote }}
+            send_resolved: true
+        {{- end }}
+        {{- if .Values.notify.emailTo }}
+        email_configs:
+          - to: {{ .Values.notify.emailTo | quote }}
+            from: {{ .Values.notify.smtpFrom | quote }}
+            smarthost: {{ .Values.notify.smtpHost | quote }}
+            send_resolved: true
+        {{- end }}

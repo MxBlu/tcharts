@@ -230,11 +230,11 @@
       "icon_url": "https://media.sys.truenas.net/apps/portainer/icons/icon.png"
     },
     "qbittorrent": {
-      "app_readme": "<h1>qBittorrent</h1><p>The qBittorrent project aims to provide an open-source software alternative to µTorrent.</p>",
+      "app_readme": "<h1>qBittorrent</h1><p>The qBittorrent project aims to provide an open-source software alternative to \u00b5Torrent.</p>",
       "categories": [
         "media"
       ],
-      "description": "The qBittorrent project aims to provide an open-source software alternative to µTorrent.",
+      "description": "The qBittorrent project aims to provide an open-source software alternative to \u00b5Torrent.",
       "healthy": true,
       "healthy_error": null,
       "home": "https://www.qbittorrent.org/",
@@ -307,6 +307,146 @@
         "https://github.com/truenas/charts/tree/master/charts/syncthing"
       ],
       "icon_url": "https://media.sys.truenas.net/apps/syncthing/icons/icon.svg"
+    },
+    "prometheus": {
+      "app_readme": "<h1>Prometheus</h1><p>Prometheus time-series database scraping Proxmox VE metrics via <code>pve-exporter</code>, with built-in Proxmox alert rules and Alertmanager forwarding.</p><p>Scrape target and Alertmanager endpoint are configurable at install time. Data persists on the host path.</p>",
+      "categories": [
+        "monitoring"
+      ],
+      "description": "Prometheus monitoring server scraping Proxmox VE via pve-exporter, with alert rules.",
+      "healthy": true,
+      "healthy_error": null,
+      "home": "https://prometheus.io/",
+      "location": "charts/prometheus",
+      "latest_version": "1.0.0",
+      "latest_app_version": "v3.15.1",
+      "latest_human_version": "v3.15.1_1.0.0",
+      "last_update": "2026-11-04 00:00:00",
+      "name": "prometheus",
+      "recommended": false,
+      "title": "Prometheus",
+      "maintainers": [
+        {
+          "name": "MxBlu",
+          "email": "mxblu@example.com"
+        }
+      ],
+      "tags": [
+        "monitoring",
+        "metrics",
+        "prometheus",
+        "proxmox"
+      ],
+      "screenshots": [],
+      "sources": [
+        "https://github.com/prometheus/prometheus"
+      ],
+      "icon_url": "https://media.sys.truenas.net/apps/prometheus/icons/icon.png"
+    },
+    "grafana": {
+      "app_readme": "<h1>Grafana</h1><p>Grafana with a provisioned Prometheus datasource. Log in with the admin credentials set at install time, then import the <code>Proxmox via Prometheus</code> dashboard (ID 10347).</p>",
+      "categories": [
+        "monitoring"
+      ],
+      "description": "Grafana dashboards for Proxmox VE, pre-wired to Prometheus.",
+      "healthy": true,
+      "healthy_error": null,
+      "home": "https://grafana.com/",
+      "location": "charts/grafana",
+      "latest_version": "1.0.0",
+      "latest_app_version": "13.3.0",
+      "latest_human_version": "13.3.0_1.0.0",
+      "last_update": "2026-11-04 00:00:00",
+      "name": "grafana",
+      "recommended": false,
+      "title": "Grafana",
+      "maintainers": [
+        {
+          "name": "MxBlu",
+          "email": "mxblu@example.com"
+        }
+      ],
+      "tags": [
+        "monitoring",
+        "dashboards",
+        "grafana",
+        "proxmox"
+      ],
+      "screenshots": [],
+      "sources": [
+        "https://github.com/grafana/grafana"
+      ],
+      "icon_url": "https://media.sys.truenas.net/apps/grafana/icons/icon.png"
+    },
+    "alertmanager": {
+      "app_readme": "<h1>Alertmanager</h1><p>Handles alerts from Prometheus. Configure a webhook URL (Discord/Slack/Gotify) and/or email at install time. With no receivers configured, alerts are stored but not delivered.</p>",
+      "categories": [
+        "monitoring"
+      ],
+      "description": "Prometheus Alertmanager routing Proxmox alerts to webhook and email receivers.",
+      "healthy": true,
+      "healthy_error": null,
+      "home": "https://prometheus.io/docs/alerting/latest/alertmanager/",
+      "location": "charts/alertmanager",
+      "latest_version": "1.0.0",
+      "latest_app_version": "v0.34.1",
+      "latest_human_version": "v0.34.1_1.0.0",
+      "last_update": "2026-11-04 00:00:00",
+      "name": "alertmanager",
+      "recommended": false,
+      "title": "Alertmanager",
+      "maintainers": [
+        {
+          "name": "MxBlu",
+          "email": "mxblu@example.com"
+        }
+      ],
+      "tags": [
+        "monitoring",
+        "alerting",
+        "prometheus",
+        "proxmox"
+      ],
+      "screenshots": [],
+      "sources": [
+        "https://github.com/prometheus/alertmanager"
+      ],
+      "icon_url": "https://prometheus.io/assets/favicons/favicon.ico"
+    },
+    "pve-exporter": {
+      "app_readme": "<h1>PVE Exporter</h1><p>Exposes Proxmox VE metrics at <code>/pve?target=&lt;proxmox-host&gt;&amp;module=default</code> for Prometheus. Needs a Proxmox API token (read-only <code>PVEAuditor</code> is enough).</p>",
+      "categories": [
+        "monitoring"
+      ],
+      "description": "Prometheus exporter exposing Proxmox VE cluster, node, guest and storage metrics.",
+      "healthy": true,
+      "healthy_error": null,
+      "home": "https://github.com/prometheus-pve/prometheus-pve-exporter",
+      "location": "charts/pve-exporter",
+      "latest_version": "1.0.0",
+      "latest_app_version": "3.11.0",
+      "latest_human_version": "3.11.0_1.0.0",
+      "last_update": "2026-11-04 00:00:00",
+      "name": "pve-exporter",
+      "recommended": false,
+      "title": "PVE Exporter",
+      "maintainers": [
+        {
+          "name": "MxBlu",
+          "email": "mxblu@example.com"
+        }
+      ],
+      "tags": [
+        "monitoring",
+        "metrics",
+        "prometheus",
+        "proxmox"
+      ],
+      "screenshots": [],
+      "sources": [
+        "https://github.com/prometheus-pve/prometheus-pve-exporter"
+      ],
+      "icon_url": "https://pve.proxmox.com/favicon.ico"
     }
   }
 }

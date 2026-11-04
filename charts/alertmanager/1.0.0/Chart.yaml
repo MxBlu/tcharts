@@ -1,0 +1,20 @@
+apiVersion: v2
+name: alertmanager
+description: Prometheus Alertmanager routing Proxmox alerts to webhook and email receivers.
+type: application
+version: 1.0.0
+appVersion: v0.34.1
+annotations:
+  title: Alertmanager
+home: https://prometheus.io/docs/alerting/latest/alertmanager/
+icon: https://prometheus.io/assets/favicons/favicon.ico
+maintainers:
+- name: MxBlu
+  email: mxblu@example.com
+keywords:
+- monitoring
+- alerting
+- prometheus
+- proxmox
+sources:
+- https://github.com/prometheus/alertmanager

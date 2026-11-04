@@ -1,0 +1,1 @@
+<h1>Grafana</h1><p>Grafana with a provisioned Prometheus datasource. Log in with the admin credentials set at install time, then import the <code>Proxmox via Prometheus</code> dashboard (ID 10347).</p>

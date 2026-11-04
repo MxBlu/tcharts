@@ -1,0 +1,20 @@
+apiVersion: v2
+name: grafana
+description: Grafana dashboards for Proxmox VE, pre-wired to Prometheus.
+type: application
+version: 1.0.0
+appVersion: 13.3.0
+annotations:
+  title: Grafana
+home: https://grafana.com/
+icon: https://media.sys.truenas.net/apps/grafana/icons/icon.png
+maintainers:
+- name: MxBlu
+  email: mxblu@example.com
+keywords:
+- monitoring
+- dashboards
+- grafana
+- proxmox
+sources:
+- https://github.com/grafana/grafana

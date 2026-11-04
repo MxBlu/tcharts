@@ -1,0 +1,161 @@
+groups:
+- name: Container Images
+  description: Image configuration
+- name: Networking
+  description: Service networking
+- name: Storage
+  description: Persistent storage
+- name: Monitoring
+  description: Monitoring configuration
+questions:
+- variable: image
+  label: Docker Image
+  description: Docker image settings
+  group: Container Images
+  schema:
+    type: dict
+    required: true
+    attrs:
+    - variable: repository
+      label: Repository
+      schema:
+        type: string
+        required: true
+        default: prom/prometheus
+    - variable: tag
+      label: Tag
+      schema:
+        type: string
+        required: true
+        default: v3.15.1
+    - variable: pullPolicy
+      label: Pull Policy
+      schema:
+        type: string
+        default: IfNotPresent
+        enum:
+        - value: IfNotPresent
+          description: Only pull if missing
+        - value: Always
+          description: Always pull
+        - value: Never
+          description: Never pull
+- variable: service
+  label: Service
+  description: Service exposure settings
+  group: Networking
+  schema:
+    type: dict
+    required: true
+    attrs:
+    - variable: type
+      label: Service Type
+      schema:
+        type: string
+        default: NodePort
+        enum:
+        - value: NodePort
+          description: Expose using a node port
+        - value: ClusterIP
+          description: Cluster-internal only
+    - variable: port
+      label: Service Port
+      schema:
+        type: int
+        default: 9090
+        min: 1
+        max: 65535
+    - variable: targetPort
+      label: Container Port
+      schema:
+        type: int
+        default: 9090
+        min: 1
+        max: 65535
+    - variable: nodePort
+      label: Node Port
+      schema:
+        show_if:
+        - - type
+          - '='
+          - NodePort
+        type: int
+        default: 30900
+        min: 9000
+        max: 65535
+- variable: storage
+  label: Storage
+  description: Persistent data location on the TrueNAS host
+  group: Storage
+  schema:
+    type: dict
+    required: true
+    attrs:
+    - variable: hostPath
+      label: Data host path
+      description: Host directory for persistent data (created if missing)
+      schema:
+        type: string
+        required: true
+        default: /mnt/fast/monitoring/prometheus
+- variable: scrape
+  label: Scrape Targets
+  description: What Prometheus scrapes
+  group: Monitoring
+  schema:
+    type: dict
+    required: true
+    attrs:
+    - variable: pveHost
+      label: Proxmox host (API target)
+      description: Any cluster member IP; exporter queries the cluster API
+      schema:
+        type: string
+        required: true
+        default: 192.168.2.10
+    - variable: exporterHost
+      label: pve-exporter host
+      schema:
+        type: string
+        required: true
+        default: 192.168.0.117
+    - variable: exporterPort
+      label: pve-exporter NodePort
+      schema:
+        type: int
+        default: 30903
+        min: 1
+        max: 65535
+    - variable: interval
+      label: Scrape interval
+      schema:
+        type: string
+        default: 30s
+- variable: alerting
+  label: Alerting
+  description: Alertmanager endpoint
+  group: Monitoring
+  schema:
+    type: dict
+    required: true
+    attrs:
+    - variable: host
+      label: Alertmanager host
+      schema:
+        type: string
+        required: true
+        default: 192.168.0.117
+    - variable: port
+      label: Alertmanager NodePort
+      schema:
+        type: int
+        default: 30902
+        min: 1
+        max: 65535
+- variable: retention
+  label: Retention
+  description: How long to keep metrics
+  group: Monitoring
+  schema:
+    type: string
+    default: 90d

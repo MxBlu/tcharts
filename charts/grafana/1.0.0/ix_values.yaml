@@ -1,0 +1,16 @@
+image:
+  repository: grafana/grafana
+  tag: 13.3.0
+  pullPolicy: IfNotPresent
+service:
+  type: NodePort
+  port: 3000
+  targetPort: 3000
+  nodePort: 30901
+storage:
+  hostPath: /mnt/fast/monitoring/grafana
+admin:
+  user: admin
+  password: changeme
+datasource:
+  prometheusUrl: http://192.168.0.117:30900

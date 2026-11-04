@@ -1,0 +1,135 @@
+groups:
+- name: Container Images
+  description: Image configuration
+- name: Networking
+  description: Service networking
+- name: Storage
+  description: Persistent storage
+- name: Monitoring
+  description: Monitoring configuration
+questions:
+- variable: image
+  label: Docker Image
+  description: Docker image settings
+  group: Container Images
+  schema:
+    type: dict
+    required: true
+    attrs:
+    - variable: repository
+      label: Repository
+      schema:
+        type: string
+        required: true
+        default: grafana/grafana
+    - variable: tag
+      label: Tag
+      schema:
+        type: string
+        required: true
+        default: 13.3.0
+    - variable: pullPolicy
+      label: Pull Policy
+      schema:
+        type: string
+        default: IfNotPresent
+        enum:
+        - value: IfNotPresent
+          description: Only pull if missing
+        - value: Always
+          description: Always pull
+        - value: Never
+          description: Never pull
+- variable: service
+  label: Service
+  description: Service exposure settings
+  group: Networking
+  schema:
+    type: dict
+    required: true
+    attrs:
+    - variable: type
+      label: Service Type
+      schema:
+        type: string
+        default: NodePort
+        enum:
+        - value: NodePort
+          description: Expose using a node port
+        - value: ClusterIP
+          description: Cluster-internal only
+    - variable: port
+      label: Service Port
+      schema:
+        type: int
+        default: 3000
+        min: 1
+        max: 65535
+    - variable: targetPort
+      label: Container Port
+      schema:
+        type: int
+        default: 3000
+        min: 1
+        max: 65535
+    - variable: nodePort
+      label: Node Port
+      schema:
+        show_if:
+        - - type
+          - '='
+          - NodePort
+        type: int
+        default: 30901
+        min: 9000
+        max: 65535
+- variable: storage
+  label: Storage
+  description: Persistent data location on the TrueNAS host
+  group: Storage
+  schema:
+    type: dict
+    required: true
+    attrs:
+    - variable: hostPath
+      label: Data host path
+      description: Host directory for persistent data (created if missing)
+      schema:
+        type: string
+        required: true
+        default: /mnt/fast/monitoring/grafana
+- variable: admin
+  label: Admin Account
+  description: Initial Grafana admin login
+  group: Monitoring
+  schema:
+    type: dict
+    required: true
+    attrs:
+    - variable: user
+      label: Admin user
+      schema:
+        type: string
+        required: true
+        default: admin
+    - variable: password
+      label: Admin password
+      description: Change this at install time
+      schema:
+        type: string
+        required: true
+        default: changeme
+- variable: datasource
+  label: Datasource
+  description: Prometheus datasource provisioned automatically
+  group: Monitoring
+  schema:
+    type: dict
+    required: true
+    attrs:
+    - variable: prometheusUrl
+      label: Prometheus URL
+      schema:
+        type: string
+        required: true
+        default: http://192.168.0.117:30900

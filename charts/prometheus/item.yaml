@@ -1,0 +1,8 @@
+categories:
+- monitoring
+icon_url: https://media.sys.truenas.net/apps/prometheus/icons/icon.png
+tags:
+- monitoring
+- metrics
+- prometheus
+- proxmox

@@ -1,0 +1,1 @@
+<h1>PVE Exporter</h1><p>Exposes Proxmox VE metrics at <code>/pve?target=&lt;proxmox-host&gt;&amp;module=default</code> for Prometheus. Needs a Proxmox API token (read-only <code>PVEAuditor</code> is enough).</p>

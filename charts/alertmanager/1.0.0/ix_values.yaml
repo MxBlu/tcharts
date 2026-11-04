@@ -1,0 +1,16 @@
+image:
+  repository: prom/alertmanager
+  tag: v0.34.1
+  pullPolicy: IfNotPresent
+service:
+  type: NodePort
+  port: 9093
+  targetPort: 9093
+  nodePort: 30902
+storage:
+  hostPath: /mnt/fast/monitoring/alertmanager
+notify:
+  webhookUrl: ''
+  emailTo: ''
+  smtpHost: localhost:25
+  smtpFrom: alertmanager@example.com

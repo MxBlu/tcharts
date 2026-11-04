@@ -1,0 +1,8 @@
+categories:
+- monitoring
+icon_url: https://prometheus.io/assets/favicons/favicon.ico
+tags:
+- monitoring
+- alerting
+- prometheus
+- proxmox
