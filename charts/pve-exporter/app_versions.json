@@ -224,5 +224,231 @@
         }
       ]
     }
+  },
+  "1.0.1": {
+    "healthy": true,
+    "supported": true,
+    "healthy_error": null,
+    "location": "/charts/pve-exporter/1.0.1",
+    "last_update": "2026-11-04 00:00:00",
+    "required_features": [],
+    "human_version": "3.11.0_1.0.1",
+    "version": "1.0.1",
+    "chart_metadata": {
+      "apiVersion": "v2",
+      "name": "pve-exporter",
+      "description": "Prometheus exporter exposing Proxmox VE cluster, node, guest and storage metrics.",
+      "type": "application",
+      "version": "1.0.1",
+      "appVersion": "3.11.0",
+      "annotations": {
+        "title": "PVE Exporter"
+      },
+      "home": "https://github.com/prometheus-pve/prometheus-pve-exporter",
+      "icon": "https://pve.proxmox.com/favicon.ico",
+      "maintainers": [
+        {
+          "name": "MxBlu",
+          "email": "mxblu@example.com"
+        }
+      ],
+      "keywords": [
+        "monitoring",
+        "metrics",
+        "prometheus",
+        "proxmox"
+      ],
+      "sources": [
+        "https://github.com/prometheus-pve/prometheus-pve-exporter"
+      ]
+    },
+    "app_metadata": null,
+    "schema": {
+      "groups": [
+        {
+          "name": "Container Images",
+          "description": "Image configuration"
+        },
+        {
+          "name": "Networking",
+          "description": "Service networking"
+        },
+        {
+          "name": "Monitoring",
+          "description": "Monitoring configuration"
+        }
+      ],
+      "questions": [
+        {
+          "variable": "image",
+          "label": "Docker Image",
+          "description": "Docker image settings",
+          "group": "Container Images",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "repository",
+                "label": "Repository",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "prompve/prometheus-pve-exporter"
+                }
+              },
+              {
+                "variable": "tag",
+                "label": "Tag",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "3.11.0"
+                }
+              },
+              {
+                "variable": "pullPolicy",
+                "label": "Pull Policy",
+                "schema": {
+                  "type": "string",
+                  "default": "IfNotPresent",
+                  "enum": [
+                    {
+                      "value": "IfNotPresent",
+                      "description": "Only pull if missing"
+                    },
+                    {
+                      "value": "Always",
+                      "description": "Always pull"
+                    },
+                    {
+                      "value": "Never",
+                      "description": "Never pull"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "variable": "service",
+          "label": "Service",
+          "description": "Service exposure settings",
+          "group": "Networking",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "type",
+                "label": "Service Type",
+                "schema": {
+                  "type": "string",
+                  "default": "NodePort",
+                  "enum": [
+                    {
+                      "value": "NodePort",
+                      "description": "Expose using a node port"
+                    },
+                    {
+                      "value": "ClusterIP",
+                      "description": "Cluster-internal only"
+                    }
+                  ]
+                }
+              },
+              {
+                "variable": "port",
+                "label": "Service Port",
+                "schema": {
+                  "type": "int",
+                  "default": 9221,
+                  "min": 1,
+                  "max": 65535
+                }
+              },
+              {
+                "variable": "targetPort",
+                "label": "Container Port",
+                "schema": {
+                  "type": "int",
+                  "default": 9221,
+                  "min": 1,
+                  "max": 65535
+                }
+              },
+              {
+                "variable": "nodePort",
+                "label": "Node Port",
+                "schema": {
+                  "show_if": [
+                    [
+                      "type",
+                      "=",
+                      "NodePort"
+                    ]
+                  ],
+                  "type": "int",
+                  "default": 30903,
+                  "min": 9000,
+                  "max": 65535
+                }
+              }
+            ]
+          }
+        },
+        {
+          "variable": "pve",
+          "label": "Proxmox API Credentials",
+          "description": "Read-only API token is enough (PVEAuditor role)",
+          "group": "Monitoring",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "user",
+                "label": "API user",
+                "description": "e.g. monitoring@pam or root@pam",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "root@pam"
+                }
+              },
+              {
+                "variable": "tokenName",
+                "label": "Token name",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "agent01"
+                }
+              },
+              {
+                "variable": "tokenValue",
+                "label": "Token secret",
+                "description": "The UUID secret of the API token",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": ""
+                }
+              },
+              {
+                "variable": "verifySsl",
+                "label": "Verify SSL",
+                "description": "Enable if Proxmox uses a publicly trusted certificate",
+                "schema": {
+                  "type": "boolean",
+                  "default": false
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
   }
 }
