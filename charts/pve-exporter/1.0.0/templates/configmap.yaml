@@ -6,6 +6,6 @@ data:
   pve.yml: |
     default:
       user: {{ .Values.pve.user | quote }}
-      token-name: {{ .Values.pve.tokenName | quote }}
-      token-value: {{ .Values.pve.tokenValue | quote }}
+      token_name: {{ .Values.pve.tokenName | quote }}
+      token_value: {{ .Values.pve.tokenValue | quote }}
       verify_ssl: {{ .Values.pve.verifySsl }}
