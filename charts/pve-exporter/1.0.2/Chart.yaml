@@ -1,0 +1,21 @@
+apiVersion: v2
+name: pve-exporter
+description: Prometheus exporter exposing Proxmox VE cluster, node, guest and storage
+  metrics.
+type: application
+version: 1.0.2
+appVersion: 3.11.0
+annotations:
+  title: PVE Exporter
+home: https://github.com/prometheus-pve/prometheus-pve-exporter
+icon: https://pve.proxmox.com/favicon.ico
+maintainers:
+- name: MxBlu
+  email: mxblu@example.com
+keywords:
+- monitoring
+- metrics
+- prometheus
+- proxmox
+sources:
+- https://github.com/prometheus-pve/prometheus-pve-exporter
