@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Chart.Name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Chart.Name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args: ["python", "/app/exporter.py"]
+          env:
+            - name: PVE_HOST
+              value: {{ .Values.pve.host | quote }}
+            - name: PVE_PORT
+              value: {{ .Values.pve.port | quote }}
+            - name: PVE_USER
+              value: {{ .Values.pve.user | quote }}
+            - name: PVE_TOKEN_NAME
+              value: {{ .Values.pve.tokenName | quote }}
+            - name: PVE_TOKEN_VALUE
+              value: {{ .Values.pve.tokenValue | quote }}
+            - name: PVE_VERIFY_SSL
+              value: {{ .Values.pve.verifySsl | quote }}
+            - name: POLL_INTERVAL
+              value: {{ .Values.pve.pollInterval | quote }}
+            - name: PORT
+              value: "9224"
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+              name: http
+          volumeMounts:
+            - name: app
+              mountPath: /app/exporter.py
+              subPath: exporter.py
+      volumes:
+        - name: app
+          configMap:
+            name: {{ .Release.Name }}
+            defaultMode: 0555

@@ -1,0 +1,17 @@
+image:
+  repository: python
+  tag: 3.14-slim
+  pullPolicy: IfNotPresent
+service:
+  type: NodePort
+  port: 9224
+  targetPort: 9224
+  nodePort: 30904
+pve:
+  host: 192.168.2.10
+  port: 8006
+  user: monitoring@pve
+  tokenName: exporter
+  tokenValue: ''
+  verifySsl: false
+  pollInterval: 60

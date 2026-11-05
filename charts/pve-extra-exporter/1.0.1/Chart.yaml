@@ -1,0 +1,20 @@
+apiVersion: v2
+name: pve-extra-exporter
+description: Node network rates (RRD) and user last-login (cluster log) for Proxmox VE.
+type: application
+version: 1.0.1
+appVersion: 1.0.1
+annotations:
+  title: PVE Extra Exporter
+home: https://github.com/MxBlu/tcharts
+icon: https://pve.proxmox.com/favicon.ico
+maintainers:
+- name: MxBlu
+  email: mxblu@example.com
+keywords:
+- monitoring
+- metrics
+- prometheus
+- proxmox
+sources:
+- https://github.com/MxBlu/tcharts

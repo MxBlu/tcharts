@@ -250,5 +250,257 @@
         }
       ]
     }
+  },
+  "1.0.1": {
+    "healthy": true,
+    "supported": true,
+    "healthy_error": null,
+    "location": "/charts/pve-extra-exporter/1.0.1",
+    "last_update": "2026-11-05 00:00:00",
+    "required_features": [],
+    "human_version": "1.0.1_1.0.1",
+    "version": "1.0.1",
+    "chart_metadata": {
+      "apiVersion": "v2",
+      "name": "pve-extra-exporter",
+      "description": "Node network rates (RRD) and user last-login (cluster log) for Proxmox VE.",
+      "type": "application",
+      "version": "1.0.1",
+      "appVersion": "1.0.1",
+      "annotations": {
+        "title": "PVE Extra Exporter"
+      },
+      "home": "https://github.com/MxBlu/tcharts",
+      "icon": "https://pve.proxmox.com/favicon.ico",
+      "maintainers": [
+        {
+          "name": "MxBlu",
+          "email": "mxblu@example.com"
+        }
+      ],
+      "keywords": [
+        "monitoring",
+        "metrics",
+        "prometheus",
+        "proxmox"
+      ],
+      "sources": [
+        "https://github.com/MxBlu/tcharts"
+      ]
+    },
+    "app_metadata": null,
+    "schema": {
+      "groups": [
+        {
+          "name": "Container Images",
+          "description": "Image configuration"
+        },
+        {
+          "name": "Networking",
+          "description": "Service networking"
+        },
+        {
+          "name": "Monitoring",
+          "description": "Proxmox connection"
+        }
+      ],
+      "questions": [
+        {
+          "variable": "image",
+          "label": "Docker Image",
+          "description": "Docker image settings",
+          "group": "Container Images",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "repository",
+                "label": "Repository",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "python"
+                }
+              },
+              {
+                "variable": "tag",
+                "label": "Tag",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "3.14-slim"
+                }
+              },
+              {
+                "variable": "pullPolicy",
+                "label": "Pull Policy",
+                "schema": {
+                  "type": "string",
+                  "default": "IfNotPresent",
+                  "enum": [
+                    {
+                      "value": "IfNotPresent",
+                      "description": "Only pull if missing"
+                    },
+                    {
+                      "value": "Always",
+                      "description": "Always pull"
+                    },
+                    {
+                      "value": "Never",
+                      "description": "Never pull"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "variable": "service",
+          "label": "Service",
+          "description": "Service exposure settings",
+          "group": "Networking",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "type",
+                "label": "Service Type",
+                "schema": {
+                  "type": "string",
+                  "default": "NodePort",
+                  "enum": [
+                    {
+                      "value": "NodePort",
+                      "description": "Expose using a node port"
+                    },
+                    {
+                      "value": "ClusterIP",
+                      "description": "Cluster-internal only"
+                    }
+                  ]
+                }
+              },
+              {
+                "variable": "port",
+                "label": "Service Port",
+                "schema": {
+                  "type": "int",
+                  "default": 9224,
+                  "min": 1,
+                  "max": 65535
+                }
+              },
+              {
+                "variable": "targetPort",
+                "label": "Container Port",
+                "schema": {
+                  "type": "int",
+                  "default": 9224,
+                  "min": 1,
+                  "max": 65535
+                }
+              },
+              {
+                "variable": "nodePort",
+                "label": "Node Port",
+                "schema": {
+                  "show_if": [
+                    [
+                      "type",
+                      "=",
+                      "NodePort"
+                    ]
+                  ],
+                  "type": "int",
+                  "default": 30904,
+                  "min": 9000,
+                  "max": 65535
+                }
+              }
+            ]
+          }
+        },
+        {
+          "variable": "pve",
+          "label": "Proxmox API Credentials",
+          "description": "Read-only monitoring token (PVEAuditor is enough)",
+          "group": "Monitoring",
+          "schema": {
+            "type": "dict",
+            "required": true,
+            "attrs": [
+              {
+                "variable": "host",
+                "label": "Proxmox host",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "192.168.2.10"
+                }
+              },
+              {
+                "variable": "port",
+                "label": "API port",
+                "schema": {
+                  "type": "int",
+                  "default": 8006,
+                  "min": 1,
+                  "max": 65535
+                }
+              },
+              {
+                "variable": "user",
+                "label": "API user",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "monitoring@pve"
+                }
+              },
+              {
+                "variable": "tokenName",
+                "label": "Token name",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": "exporter"
+                }
+              },
+              {
+                "variable": "tokenValue",
+                "label": "Token secret",
+                "schema": {
+                  "type": "string",
+                  "required": true,
+                  "default": ""
+                }
+              },
+              {
+                "variable": "verifySsl",
+                "label": "Verify SSL",
+                "schema": {
+                  "type": "boolean",
+                  "default": false
+                }
+              },
+              {
+                "variable": "pollInterval",
+                "label": "Poll interval (s)",
+                "schema": {
+                  "type": "int",
+                  "default": 60,
+                  "min": 15,
+                  "max": 3600
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
   }
 }
